@@ -27,6 +27,8 @@ authors = [
 # Required Python version and dependencies
 requires-python = ">=3.11"
 dependencies = [
+    "bioio",
+    "bioio-czi",
     "fractal-converters-tools >= 0.6.0,<0.7.0",
     "fractal-task-tools==0.0.12",
     "ngio>=0.2.7,<0.3.0",
