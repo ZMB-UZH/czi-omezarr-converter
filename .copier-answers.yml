@@ -1,0 +1,10 @@
+# Do not edit - changes here will be overwritten by Copier
+_commit: v0.5.0
+_src_path: gh:fractal-analytics-platform/fractal-tasks-template
+author_email: st.flurin@gmail.com
+author_name: Flurin Sturzenegger
+package_name: czi_omezarr_converter
+project_name: czi-omezarr-converter
+project_short_description: Zeiss .czi to OME-Zarr converter
+project_url: ''
+
