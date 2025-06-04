@@ -38,7 +38,7 @@ jobs:
         run: python -m pip install -e .[dev]
 
       - name: Check if manifest is up to date
-        run: fractal-manifest check --package nd2-omezarr-converter
+        run: fractal-manifest check --package czi-omezarr-converter
 
       - name: Test core library with pytest
         run: python -m pytest --cov=czi_omezarr_converter --cov-branch --cov-report=xml tests
