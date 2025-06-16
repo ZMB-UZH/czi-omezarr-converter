@@ -88,7 +88,9 @@ def build_tiles(czi_path: str | Path, scene_id: int) -> Generator[Tile, Any, Non
 
     if "M" in img.dims.order:
         for m in range(img.dims.M):
-            y_start_index, x_start_index = img.get_mosaic_tile_position(m)
+            y_start_index, x_start_index = img.get_mosaic_tile_position(
+                m, T=0, C=0, Z=0
+            )
             # TODO: check if this is consistent with other data.
             # otherwise: handle with AdvancedComputeOptions
             y_start_index = -y_start_index
@@ -106,7 +108,6 @@ def build_tiles(czi_path: str | Path, scene_id: int) -> Generator[Tile, Any, Non
                 x_micrometer_original=x_start_index * scale_x,
                 y_micrometer_original=y_start_index * scale_y,
                 z_micrometer_original=0,
-                t_original=0,
             )
             tile_loader = cziTileLoader(path=czi_path, scene_id=scene_id, m=m)
             tile = Tile(
@@ -132,7 +133,6 @@ def build_tiles(czi_path: str | Path, scene_id: int) -> Generator[Tile, Any, Non
             x_micrometer_original=0,
             y_micrometer_original=0,
             z_micrometer_original=0,
-            t_original=0,
         )
         tile_loader = cziTileLoader(path=czi_path, scene_id=scene_id, m=None)
         tile = Tile(
