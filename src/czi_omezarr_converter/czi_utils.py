@@ -4,7 +4,8 @@ from typing import Any
 
 import numpy as np
 from bioio import BioImage
-from fractal_converters_tools import (
+from ngio import PixelSize
+from ome_zarr_converters_tools import (
     OriginDict,
     # PlatePathBuilder,
     Point,
@@ -13,7 +14,6 @@ from fractal_converters_tools import (
     TiledImage,
     Vector,
 )
-from ngio import PixelSize
 
 
 class cziTileLoader:

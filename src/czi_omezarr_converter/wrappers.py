@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Literal
 
-from fractal_converters_tools import AdvancedComputeOptions
+from ome_zarr_converters_tools import AdvancedComputeOptions
 
 from czi_omezarr_converter.convert_czi_compute_task import (
     convert_czi_compute_task,
