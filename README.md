@@ -1,3 +1,6 @@
+[![CI (build and test)](https://github.com/ZMB-UZH/czi-omezarr-converter/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/ZMB-UZH/czi-omezarr-converter/actions/workflows/build_and_test.yml)
+[![codecov](https://codecov.io/gh/ZMB-UZH/czi-omezarr-converter/graph/badge.svg?token=N8I3OZNM0i)](https://codecov.io/gh/ZMB-UZH/czi-omezarr-converter)
+
 # czi-omezarr-converter
 
 Zeiss .czi to OME-Zarr converter
