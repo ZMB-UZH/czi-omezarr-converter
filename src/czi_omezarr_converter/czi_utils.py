@@ -4,7 +4,8 @@ from typing import Any
 
 import numpy as np
 from bioio import BioImage
-from fractal_converters_tools import (
+from ngio import PixelSize
+from ome_zarr_converters_tools import (
     OriginDict,
     # PlatePathBuilder,
     Point,
@@ -13,7 +14,6 @@ from fractal_converters_tools import (
     TiledImage,
     Vector,
 )
-from ngio import PixelSize
 
 
 class cziTileLoader:
@@ -145,6 +145,28 @@ def build_tiles(czi_path: str | Path, scene_id: int) -> Generator[Tile, Any, Non
         yield tile
 
 
+def get_channel_color(metadata_element, channel_name):
+    path = [
+        "Metadata",
+        "Information",
+        "Image",
+        "Dimensions",
+        "Channels",
+        f'Channel[@Name="{channel_name}"]',
+        "Color",
+    ]
+    el = metadata_element
+    for tag in path:
+        try:
+            el = el.find(tag)
+        except AttributeError:
+            el = None
+            break
+    if el is not None:
+        return el.text[3:]
+    return None
+
+
 def build_tiled_image(
     czi_path: str | Path,
     zarr_name: str | None = None,
@@ -163,6 +185,9 @@ def build_tiled_image(
     channel_names = img.channel_names
     # TODO: check with other test data if this is reasonable
     wavelength_ids = [name.split("-")[0] for name in channel_names]
+    channel_colors = [get_channel_color(img.metadata, name) for name in channel_names]
+    if None in channel_colors:
+        channel_colors = None
 
     if plate:
         # TODO:
@@ -182,6 +207,7 @@ def build_tiled_image(
         path_builder=_path_builder,
         channel_names=channel_names,
         wavelength_ids=wavelength_ids,
+        channel_colors=channel_colors,
     )
     for tile in build_tiles(czi_path, scene_id):
         tiled_image.add_tile(tile)
